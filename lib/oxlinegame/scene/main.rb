@@ -7,22 +7,30 @@ module Oxlinegame
     class Main
       include Base
 
-      def initialize(window)
-        super
+      def initialize(window, players=nil)
+        players ||= [Player::MAN, Player::COM]
+        super(window)
         @n_rows = @window.options[:n_rows] || 3
         @cursor = Object::Cursor.new(@window, @n_rows)
         @objects << @cursor
         @board = Object::Board.new(@window, @n_rows)
         @objects << @board
-        @players = [
-          Player.new(Player::MAN, 1),
-          Player.new(Player::COM, 2),
-        ]
+        @players = players.collect.with_index do |player, i|
+          Player.new(player, i + 1)
+        end
         @turn = 0
       end
 
       def update
         super
+        if @players[@turn].type == Player::COM and @board.markable?
+          until @board.mark(@players[@turn].mark,
+                            rand(@n_rows),
+                            rand(@n_rows))
+          end
+          @turn += 1
+          @turn = 0 unless @players[@turn]
+        end
       end
 
       def draw
@@ -32,18 +40,12 @@ module Oxlinegame
       def button_down(id)
         case id
         when Gosu::KbReturn
+          return unless @board.markable?
+          return unless @players[@turn].type == Player::MAN
+
           succeeded = @board.mark(@players[@turn].mark,
                                   @cursor.x, @cursor.y)
           if succeeded
-            @turn += 1
-            @turn = 0 unless @players[@turn]
-          end
-
-          if @players[@turn].type == Player::COM and @board.markable?
-            until @board.mark(@players[@turn].mark,
-                              rand(@n_rows),
-                              rand(@n_rows))
-            end
             @turn += 1
             @turn = 0 unless @players[@turn]
           end
