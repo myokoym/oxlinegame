@@ -1,6 +1,6 @@
 # Oooxxx [![Gem Version](https://badge.fury.io/rb/oooxxx.svg)](http://badge.fury.io/rb/oooxxx)
 
-TODO: Describe your game
+A o/x game.
 
 ## Dependencies
 
