@@ -31,7 +31,7 @@ module Oxlinegame
       end
 
       def mark(turn, x, y)
-        if @cells[y][x] = 0
+        if @cells[y][x] == 0
           @cells[y][x] = turn
           true
         else
