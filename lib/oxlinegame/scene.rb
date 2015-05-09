@@ -1,3 +1,3 @@
-require "oooxxx/scene/base"
-require "oooxxx/scene/title"
-require "oooxxx/scene/main"
+require "oxlinegame/scene/base"
+require "oxlinegame/scene/title"
+require "oxlinegame/scene/main"

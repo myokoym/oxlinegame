@@ -1,7 +1,7 @@
 require "thor"
-require "oooxxx"
+require "oxlinegame"
 
-module Oooxxx
+module Oxlinegame
   class Command < Thor
     desc "version", "Show version"
     def version

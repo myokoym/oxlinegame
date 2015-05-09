@@ -1,6 +1,6 @@
 require "onsengame/scene/base"
 
-module Oooxxx
+module Oxlinegame
   module Scene
     module Base
       include Onsengame::Scene::Base

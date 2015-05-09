@@ -1,6 +1,6 @@
-require "oooxxx/scene"
+require "oxlinegame/scene"
 
-module Oooxxx
+module Oxlinegame
   module Scene
     class Title
       include Base

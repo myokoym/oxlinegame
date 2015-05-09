@@ -1,6 +1,6 @@
-require "oooxxx/object/base"
+require "oxlinegame/object/base"
 
-module Oooxxx
+module Oxlinegame
   module Object
     class Board
       include Base

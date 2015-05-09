@@ -1,16 +1,16 @@
 # coding: utf-8
 lib_dir = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
-require "oooxxx/version"
+require "oxlinegame/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "oooxxx"
-  spec.version       = Oooxxx::VERSION
+  spec.name          = "oxlinegame"
+  spec.version       = Oxlinegame::VERSION
   spec.authors       = ["Masafumi Yokoyama"]
   spec.email         = ["yokoyama@clear-code.com"]
   spec.summary       = %q{A o/x game.}
   spec.description   = %q{A o/x game.}
-  spec.homepage      = "https://github.com/myokoym/oooxxx"
+  spec.homepage      = "https://github.com/myokoym/oxlinegame"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

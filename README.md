@@ -1,4 +1,4 @@
-# Oooxxx [![Gem Version](https://badge.fury.io/rb/oooxxx.svg)](http://badge.fury.io/rb/oooxxx)
+# Oxlinegame [![Gem Version](https://badge.fury.io/rb/oxlinegame.svg)](http://badge.fury.io/rb/oxlinegame)
 
 A o/x game.
 
@@ -10,7 +10,7 @@ A o/x game.
 
 ### Production commands
 
-    $ bin/oooxxx
+    $ bin/oxlinegame
 
 ### Development commands
 

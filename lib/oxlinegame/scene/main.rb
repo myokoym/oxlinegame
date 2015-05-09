@@ -1,7 +1,7 @@
-require "oooxxx/scene"
-require "oooxxx/object"
+require "oxlinegame/scene"
+require "oxlinegame/object"
 
-module Oooxxx
+module Oxlinegame
   module Scene
     class Main
       include Base

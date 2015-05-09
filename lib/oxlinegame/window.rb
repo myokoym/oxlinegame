@@ -1,11 +1,11 @@
 require "onsengame/window"
-require "oooxxx/scene"
+require "oxlinegame/scene"
 
-module Oooxxx
+module Oxlinegame
   class Window < Onsengame::Window
     def initialize(options={})
       super
-      self.caption = "Oooxxx"
+      self.caption = "Oxline"
       @scenes = []
       @scenes << Scene::Title.new(self)
     end

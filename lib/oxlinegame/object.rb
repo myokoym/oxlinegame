@@ -1,3 +1,3 @@
-require "oooxxx/object/base"
-require "oooxxx/object/board"
-require "oooxxx/object/cursor"
+require "oxlinegame/object/base"
+require "oxlinegame/object/board"
+require "oxlinegame/object/cursor"

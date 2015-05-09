@@ -1,7 +1,7 @@
 require "bundler/gem_tasks"
 
 task :demo do
-  sh("bin/oooxxx", "demo")
+  sh("bin/oxlinegame", "demo")
 end
 
 task :help do
