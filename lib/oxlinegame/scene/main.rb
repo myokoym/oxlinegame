@@ -27,7 +27,7 @@ module Oxlinegame
       def button_down(id)
         case id
         when Gosu::KbReturn
-          @board.mark(@turn, @cursor)
+          @board.mark(@turn, @cursor.x, @cursor.y)
         when Gosu::KbLeft
           @cursor.left
         when Gosu::KbRight

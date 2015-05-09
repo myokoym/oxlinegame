@@ -30,9 +30,9 @@ module Oxlinegame
         end
       end
 
-      def mark(turn, cursor)
-        if @cells[cursor.y][cursor.x] = 0
-          @cells[cursor.y][cursor.x] = turn
+      def mark(turn, x, y)
+        if @cells[y][x] = 0
+          @cells[y][x] = turn
           true
         else
           false
