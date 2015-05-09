@@ -23,6 +23,12 @@ module Oxlinegame
       def draw
         @cells.each_with_index do |columns, n_row|
           columns.each_with_index do |cell, n_column|
+            @window.draw_rectangle_outline(@cell_width * n_column,
+                                           @cell_height * n_row,
+                                           @cell_width * (n_column + 1),
+                                           @cell_height * (n_row + 1),
+                                           Gosu::Color::GRAY,
+                                           ZOrder::OBJECT)
             @cell_images[cell].draw(@cell_width * n_column,
                                     @cell_height * n_row,
                                     ZOrder::OBJECT)
