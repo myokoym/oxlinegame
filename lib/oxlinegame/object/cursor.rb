@@ -8,7 +8,7 @@ module Oxlinegame
       def initialize(window, n_rows)
         super(window, window.width / 2, window.height / 2)
         @n_rows = n_rows
-        @point = [1, 1]
+        @point = [n_rows / 2, n_rows / 2]
         @width = @window.width / n_rows
         @height = @window.height / n_rows
         @color = Gosu::Color.argb(0x66ffffff)
