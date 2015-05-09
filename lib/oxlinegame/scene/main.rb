@@ -1,13 +1,11 @@
 require "oxlinegame/scene"
 require "oxlinegame/object"
+require "oxlinegame/player"
 
 module Oxlinegame
   module Scene
     class Main
       include Base
-
-      MAN_TURN = 1
-      COM_TURN = 2
 
       def initialize(window)
         super
@@ -16,7 +14,11 @@ module Oxlinegame
         @objects << @cursor
         @board = Object::Board.new(@window, @n_rows)
         @objects << @board
-        @turn = MAN_TURN
+        @players = [
+          Player.new(Player::MAN, 1),
+          Player.new(Player::COM, 2),
+        ]
+        @turn = 0
       end
 
       def update
@@ -30,15 +32,20 @@ module Oxlinegame
       def button_down(id)
         case id
         when Gosu::KbReturn
-          succeeded = @board.mark(@turn, @cursor.x, @cursor.y)
-          @turn = COM_TURN if succeeded
+          succeeded = @board.mark(@players[@tuen].mark,
+                                  @cursor.x, @cursor.y)
+          if succeeded
+            @turn += 1
+            @turn = 0 unless @players[@turn]
+          end
 
-          if @turn == COM_TURN and @board.markable?
-            until @board.mark(@turn,
+          if @players[@turn].type == Player::COM and @board.markable?
+            until @board.mark(@players[@turn].mark,
                               rand(@n_rows),
                               rand(@n_rows))
             end
-            @turn = MAN_TURN
+            @turn += 1
+            @turn = 0 unless @players[@turn]
           end
         when Gosu::KbLeft
           @cursor.left
