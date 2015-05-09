@@ -19,17 +19,18 @@ module Oxlinegame
           Player.new(player, i + 1)
         end
         @turn = 0
+        @finished = false
       end
 
       def update
+        return if @finished
         super
         if @players[@turn].type == Player::COM and @board.markable?
           until @board.mark(@players[@turn].mark,
                             rand(@n_rows),
                             rand(@n_rows))
           end
-          @turn += 1
-          @turn = 0 unless @players[@turn]
+          turn_end
         end
       end
 
@@ -46,8 +47,7 @@ module Oxlinegame
           succeeded = @board.mark(@players[@turn].mark,
                                   @cursor.x, @cursor.y)
           if succeeded
-            @turn += 1
-            @turn = 0 unless @players[@turn]
+            turn_end
           end
         when Gosu::KbLeft
           @cursor.left
@@ -60,6 +60,17 @@ module Oxlinegame
         when Gosu::KbQ
           @window.scenes.shift
         end
+      end
+
+      def turn_end
+        if @board.lined?
+          text = "Player#{@turn + 1}\nWin!"
+          @objects << Object::Result.new(@window, text, @font_path)
+          @finished = true
+        end
+        @turn += 1
+        @turn = 0 unless @players[@turn]
+        false
       end
     end
   end

@@ -17,6 +17,7 @@ module Oxlinegame
                                   @cell_height, 0, @cell_width, :center)
           ]
         end.to_h
+        @n_rows = n_rows
       end
 
       def draw
@@ -43,6 +44,29 @@ module Oxlinegame
         @cells.any? do |columns|
           columns.any? {|cell| cell == 0 }
         end
+      end
+
+      def lined?
+        @n_rows.times do |i|
+          if line_check(@cells[i])
+            return true
+          end
+          if line_check(@cells.collect {|columns| columns[i] })
+            return true
+          end
+        end
+        if line_check(@n_rows.times.collect {|i| @cells[i][i] })
+          return true
+        end
+        if line_check(@n_rows.times.collect {|i| @cells[i][@n_rows - i - 1] })
+          return true
+        end
+        false
+      end
+
+      private
+      def line_check(line)
+        line.uniq.size == 1 and line[0] != 0
       end
     end
   end
