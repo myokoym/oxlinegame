@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["yokoyama@clear-code.com"]
   spec.summary       = %q{A o/x game.}
   spec.description   = %q{A o/x game.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/myokoym/oooxxx"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
