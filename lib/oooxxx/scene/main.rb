@@ -1,4 +1,5 @@
 require "oooxxx/scene"
+require "oooxxx/object/board"
 
 module Oooxxx
   module Scene
@@ -7,21 +8,12 @@ module Oooxxx
 
       def initialize(window)
         super
-        @cursor = [1, 1]
-        @cells = [
-          [0, 0, 0],
-          [0, 1, 0],
-          [2, 0, 0],
-        ]
         @cell_width = @window.width / 3
         @cell_height = @window.height / 3
-        @cell_images = [" ", "o", "x"].collect.with_index do |label, i|
-          [
-            i,
-            Gosu::Image.from_text(@window, label, @font_path,
-                                  @cell_height, 0, @cell_width, :center)
-          ]
-        end.to_h
+        @cursor = [1, 1]
+
+        @board = Object::Board.new(@window, 3)
+        @objects << @board
       end
 
       def update
@@ -30,14 +22,6 @@ module Oooxxx
 
       def draw
         super
-        @cells.each_with_index do |columns, n_row|
-          columns.each_with_index do |cell, n_column|
-            @cell_images[cell].draw(@cell_width * n_column,
-                                    @cell_height * n_row,
-                                    ZOrder::OBJECT)
-
-          end
-        end
         @window.draw_rectangle(@cell_width * @cursor[0],
                                @cell_height * @cursor[1],
                                @cell_width * (@cursor[0] + 1),
