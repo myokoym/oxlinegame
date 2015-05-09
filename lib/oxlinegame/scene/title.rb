@@ -68,7 +68,7 @@ module Oxlinegame
                                       ZOrder::TEXT,
                                       1, 1, color)
           x = (@window.width / @players.size) * (i + 0.3)
-          @playerx_font.draw("player#{i}",
+          @playerx_font.draw("player#{i + 1}",
                              x, @window.height * 0.5,
                              ZOrder::TEXT)
         end
