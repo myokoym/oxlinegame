@@ -10,7 +10,11 @@ module Oxlinegame
         @cell_width = @window.width / n_rows
         @cell_height = @window.height / n_rows
         @cells = Array.new(n_rows) { Array.new(n_rows) { 0 } }
-        @cell_images = [" ", "o", "x"].collect.with_index do |label, i|
+        signs = [" ", "o", "x"]
+        (@window.options[:n_players] - 2).times do |i|
+          signs << i + 3
+        end
+        @cell_images = signs.collect.with_index do |label, i|
           [
             i,
             Gosu::Image.from_text(@window, label, @font_path,

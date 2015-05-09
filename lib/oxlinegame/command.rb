@@ -12,6 +12,7 @@ module Oxlinegame
     option :fullscreen, type: :boolean
     option :n_rows, type: :numeric
     option :n_win_cells, type: :numeric
+    option :n_players, type: :numeric
     def start
       @window = Window.new(options.dup)
       @window.show

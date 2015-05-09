@@ -24,8 +24,10 @@ module Oxlinegame
                                        :center)
         @players = [
           Player::MAN,
-          Player::COM,
         ]
+        (@window.options[:n_players] - 1).times do
+          @players << Player::COM
+        end
         @players_cursor = 0
         @playerx_font = Gosu::Font.new(@window, @font_path, 18)
         @player_labels = ["MAN", "COM"].collect do |label|
