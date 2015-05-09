@@ -77,7 +77,7 @@ module Oxlinegame
           max = group.collect {|key, value| value.size }.max
           max == @window.options[:n_win_cells]
         else
-        line.uniq.size == 1 and line[0] != 0
+          line.uniq.size == 1 and line[0] != 0
         end
       end
     end
