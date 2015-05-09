@@ -85,11 +85,19 @@ module Oxlinegame
         when Gosu::KbLeft
           @players_cursor -= 1
           if @players_cursor < 0
+            if @players.size >= 2
+              @players.pop
+              @window.options[:n_players] -= 1
+            end
             @players_cursor = 0
           end
         when Gosu::KbRight
           @players_cursor += 1
           if @players_cursor > @players.size - 1
+            if @players.size <= 8
+              @players << Player::COM
+              @window.options[:n_players] += 1
+            end
             @players_cursor = @players.size - 1
           end
         when Gosu::KbReturn
