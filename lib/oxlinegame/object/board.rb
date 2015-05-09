@@ -38,6 +38,12 @@ module Oxlinegame
           false
         end
       end
+
+      def markable?
+        @cells.any? do |columns|
+          columns.any? {|cell| cell == 0 }
+        end
+      end
     end
   end
 end

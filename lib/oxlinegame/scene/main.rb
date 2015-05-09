@@ -6,14 +6,17 @@ module Oxlinegame
     class Main
       include Base
 
+      MAN_TURN = 1
+      COM_TURN = 2
+
       def initialize(window)
         super
-        n_rows = @window.options[:n_rows] || 3
-        @cursor = Object::Cursor.new(@window, n_rows)
+        @n_rows = @window.options[:n_rows] || 3
+        @cursor = Object::Cursor.new(@window, @n_rows)
         @objects << @cursor
-        @board = Object::Board.new(@window, n_rows)
+        @board = Object::Board.new(@window, @n_rows)
         @objects << @board
-        @turn = 1
+        @turn = MAN_TURN
       end
 
       def update
@@ -27,7 +30,16 @@ module Oxlinegame
       def button_down(id)
         case id
         when Gosu::KbReturn
-          @board.mark(@turn, @cursor.x, @cursor.y)
+          succeeded = @board.mark(@turn, @cursor.x, @cursor.y)
+          @turn = COM_TURN if succeeded
+
+          if @turn = COM_TURN and @board.markable?
+            until @board.mark(@turn,
+                              rand(@n_rows),
+                              rand(@n_rows))
+            end
+            @turn = MAN_TURN
+          end
         when Gosu::KbLeft
           @cursor.left
         when Gosu::KbRight
