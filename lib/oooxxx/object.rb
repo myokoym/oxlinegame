@@ -1,0 +1,1 @@
+require "oooxxx/object/base"
