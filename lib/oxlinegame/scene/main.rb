@@ -67,6 +67,10 @@ module Oxlinegame
           text = "Player#{@turn + 1}\nWin!"
           @objects << Object::Result.new(@window, text, @font_path)
           @finished = true
+        elsif not @board.markable?
+          text = "Draw\n:-)"
+          @objects << Object::Result.new(@window, text, @font_path)
+          @finished = true
         end
         @turn += 1
         @turn = 0 unless @players[@turn]
