@@ -31,6 +31,14 @@ module Oxlinegame
         @point[1]
       end
 
+      def x=(x)
+        @point[0] = x
+      end
+
+      def y=(y)
+        @point[1] = y
+      end
+
       def up
         @point[1] -= 1
         @point[1] = 0 if @point[1] < 0

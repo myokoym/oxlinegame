@@ -26,9 +26,15 @@ module Oxlinegame
         return if @finished
         super
         if @players[@turn].type == Player::COM and @board.markable?
-          until @board.mark(@players[@turn].mark,
-                            rand(@n_rows),
-                            rand(@n_rows))
+          loop do
+            x = rand(@n_rows)
+            y = rand(@n_rows)
+            succeeded = @board.mark(@players[@turn].mark, x, y)
+            if succeeded
+              @cursor.x = x
+              @cursor.y = y
+              break
+            end
           end
           turn_end
         end
