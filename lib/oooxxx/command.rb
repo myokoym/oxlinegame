@@ -10,6 +10,7 @@ module Oooxxx
 
     desc "start [OPTIONS]", "Run game"
     option :fullscreen, type: :boolean
+    option :n_rows, type: :numeric
     def start
       @window = Window.new(options.dup)
       @window.show

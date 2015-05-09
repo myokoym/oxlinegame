@@ -8,9 +8,10 @@ module Oooxxx
 
       def initialize(window)
         super
-        @cursor = Object::Cursor.new(@window, 3)
+        n_rows = @window.options[:n_rows] || 3
+        @cursor = Object::Cursor.new(@window, n_rows)
         @objects << @cursor
-        @board = Object::Board.new(@window, 3)
+        @board = Object::Board.new(@window, n_rows)
         @objects << @board
       end
 

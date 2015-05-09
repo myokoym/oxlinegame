@@ -9,11 +9,7 @@ module Oooxxx
         super(window, window.width / 2, window.height / 2)
         @cell_width = @window.width / n_rows
         @cell_height = @window.height / n_rows
-        @cells = [
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0],
-        ]
+        @cells = Array.new(n_rows) { Array.new(n_rows) { 0 } }
         @cell_images = [" ", "o", "x"].collect.with_index do |label, i|
           [
             i,
