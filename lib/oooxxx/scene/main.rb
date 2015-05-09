@@ -13,6 +13,7 @@ module Oooxxx
         @objects << @cursor
         @board = Object::Board.new(@window, n_rows)
         @objects << @board
+        @turn = 1
       end
 
       def update
@@ -25,6 +26,8 @@ module Oooxxx
 
       def button_down(id)
         case id
+        when Gosu::KbReturn
+          @board.mark(@turn, @cursor)
         when Gosu::KbLeft
           @cursor.left
         when Gosu::KbRight

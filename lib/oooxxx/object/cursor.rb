@@ -5,8 +5,6 @@ module Oooxxx
     class Cursor
       include Base
 
-      attr_reader :point
-
       def initialize(window, n_rows)
         super(window, window.width / 2, window.height / 2)
         @n_rows = n_rows
@@ -23,6 +21,14 @@ module Oooxxx
                                @height * (@point[1] + 1),
                                @color,
                                ZOrder::OBJECT)
+      end
+
+      def x
+        @point[0]
+      end
+
+      def y
+        @point[1]
       end
 
       def up

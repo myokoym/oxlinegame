@@ -29,6 +29,10 @@ module Oooxxx
           end
         end
       end
+
+      def mark(turn, cursor)
+        @cells[cursor.y][cursor.x] = turn
+      end
     end
   end
 end
