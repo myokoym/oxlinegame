@@ -33,7 +33,7 @@ module Oxlinegame
           succeeded = @board.mark(@turn, @cursor.x, @cursor.y)
           @turn = COM_TURN if succeeded
 
-          if @turn = COM_TURN and @board.markable?
+          if @turn == COM_TURN and @board.markable?
             until @board.mark(@turn,
                               rand(@n_rows),
                               rand(@n_rows))
