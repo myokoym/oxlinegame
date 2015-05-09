@@ -72,7 +72,13 @@ module Oxlinegame
 
       private
       def line_check(line)
+        if @window.options[:n_win_cells]
+          group = line.reject {|cell| cell == 0 }.group_by {|cell| cell }
+          max = group.collect {|key, value| value.size }.max
+          max == @window.options[:n_win_cells]
+        else
         line.uniq.size == 1 and line[0] != 0
+        end
       end
     end
   end
