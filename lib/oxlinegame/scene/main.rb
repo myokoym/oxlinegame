@@ -32,7 +32,7 @@ module Oxlinegame
       def button_down(id)
         case id
         when Gosu::KbReturn
-          succeeded = @board.mark(@players[@tuen].mark,
+          succeeded = @board.mark(@players[@turn].mark,
                                   @cursor.x, @cursor.y)
           if succeeded
             @turn += 1
