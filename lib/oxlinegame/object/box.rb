@@ -22,6 +22,35 @@ module Oxlinegame
         @cursor = nil
         @color = Gosu::Color::WHITE
         @cursor_color = Gosu::Color::RED
+        case @direction
+        when :vertical
+          @arrow1_x1 = x + width * 0.5
+          @arrow1_x2 = x + width * 0.2
+          @arrow1_x3 = x + width * 0.8
+          @arrow1_y1 = y
+          @arrow1_y2 = y + height * 0.1
+          @arrow1_y3 = @arrow1_y2
+          @arrow2_x1 = @arrow1_x1
+          @arrow2_x2 = @arrow1_x2
+          @arrow2_x3 = @arrow1_x3
+          @arrow2_y1 = y + height
+          @arrow2_y2 = y + height * 0.9
+          @arrow2_y3 = @arrow2_y2
+        when :horizontal
+          @arrow1_x1 = x
+          @arrow1_x2 = x + width * 0.05
+          @arrow1_x3 = @arrow1_x2
+          @arrow1_y1 = y + height * 0.5
+          @arrow1_y2 = y + height * 0.2
+          @arrow1_y3 = y + height * 0.8
+          @arrow2_x1 = x + width
+          @arrow2_x2 = x + width * 0.95
+          @arrow2_x3 = @arrow2_x2
+          @arrow2_y1 = @arrow1_y1
+          @arrow2_y2 = @arrow1_y2
+          @arrow2_y3 = @arrow1_y3
+        end
+        @arrow_color = Gosu::Color.argb(0x66ffffff)
       end
 
       def draw
@@ -30,13 +59,13 @@ module Oxlinegame
           when :vertical
             x1 = @x
             y1 = @y + @height / @items.size * i
-            x2 = @x + @width / @items.size
+            x2 = @x + @width
             y2 = @y + @height / @items.size * (i + 1)
           when :horizontal
             x1 = @x + @width / @items.size * i
             y1 = @y
             x2 = @x + @width / @items.size * (i + 1)
-            y2 = @y + @height / @items.size
+            y2 = @y + @height
           else
             raise "Supported directions are :vertical or :horizontal"
           end
@@ -50,6 +79,9 @@ module Oxlinegame
           else
             draw_image(@images[item], x1, y1, x2, y2, color)
           end
+        end
+        if @cursor
+          draw_arrows
         end
       end
 
@@ -78,6 +110,17 @@ module Oxlinegame
                           x2, y2, color,
                           x1, y2, color,
                           z_order)
+      end
+
+      def draw_arrows
+        @window.draw_triangle(@arrow1_x1, @arrow1_y1, @arrow_color,
+                              @arrow1_x2, @arrow1_y2, @arrow_color,
+                              @arrow1_x3, @arrow1_y3, @arrow_color,
+                              ZOrder::OBJECT)
+        @window.draw_triangle(@arrow2_x1, @arrow2_y1, @arrow_color,
+                              @arrow2_x2, @arrow2_y2, @arrow_color,
+                              @arrow2_x3, @arrow2_y3, @arrow_color,
+                              ZOrder::OBJECT)
       end
     end
   end
