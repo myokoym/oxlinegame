@@ -52,6 +52,29 @@ module Oxlinegame
           @arrow2_y3 = @arrow1_y3
         end
         @arrow_color = Gosu::Color.argb(0x66ffffff)
+        @loop_cursor = true
+      end
+
+      def increase_cursor
+        @cursor += 1
+        if @cursor > @items.size - 1
+          if @loop_cursor
+            @cursor = 0
+          else
+            @cursor = @items.size - 1
+          end
+        end
+      end
+
+      def decrease_cursor
+        @cursor -= 1
+        if @cursor < 0
+          if @loop_cursor
+            @cursor = @items.size - 1
+          else
+            @cursor = 0
+          end
+        end
       end
 
       def draw
@@ -124,14 +147,18 @@ module Oxlinegame
       end
 
       def draw_arrows
-        @window.draw_triangle(@arrow1_x1, @arrow1_y1, @arrow_color,
-                              @arrow1_x2, @arrow1_y2, @arrow_color,
-                              @arrow1_x3, @arrow1_y3, @arrow_color,
-                              ZOrder::OBJECT)
-        @window.draw_triangle(@arrow2_x1, @arrow2_y1, @arrow_color,
-                              @arrow2_x2, @arrow2_y2, @arrow_color,
-                              @arrow2_x3, @arrow2_y3, @arrow_color,
-                              ZOrder::OBJECT)
+        if @cursor != 0 or @loop_cursor
+          @window.draw_triangle(@arrow1_x1, @arrow1_y1, @arrow_color,
+                                @arrow1_x2, @arrow1_y2, @arrow_color,
+                                @arrow1_x3, @arrow1_y3, @arrow_color,
+                                ZOrder::OBJECT)
+        end
+        if @cursor < @items.size - 1 or @loop_cursor
+          @window.draw_triangle(@arrow2_x1, @arrow2_y1, @arrow_color,
+                                @arrow2_x2, @arrow2_y2, @arrow_color,
+                                @arrow2_x3, @arrow2_y3, @arrow_color,
+                                ZOrder::OBJECT)
+        end
       end
     end
   end
