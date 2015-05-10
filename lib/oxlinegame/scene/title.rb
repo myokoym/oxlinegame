@@ -1,5 +1,6 @@
 require "oxlinegame/scene"
 require "oxlinegame/player"
+require "oxlinegame/object"
 
 module Oxlinegame
   module Scene
@@ -22,13 +23,6 @@ module Oxlinegame
                                        4,
                                        @window.width,
                                        :center)
-        @players = [
-          Player::MAN,
-        ]
-        (@window.options[:n_players] - 1).times do
-          @players << Player::COM
-        end
-        @players_cursor = 0
         @playerx_font = Gosu::Font.new(@window, @font_path, 18)
         @player_labels = ["MAN", "COM"].collect do |label|
           [
@@ -37,11 +31,22 @@ module Oxlinegame
                                   label,
                                   @font_path,
                                   20,
-                                  4,
-                                  @window.width / @players.size,
+                                  0,
+                                  120,
                                   :center)
           ]
         end.to_h
+        @players = Object::Box.new(@window,
+                                   :horizontal,
+                                   0, @window.height * 0.6,
+                                   @window.width, @window.height * 0.2,
+                                   @player_labels)
+        @objects << @players
+        @players << Player::MAN
+        (@window.options[:n_players] - 1).times do
+          @players << Player::COM
+        end
+        @players.cursor = 0
         @guide_color = Gosu::Color::WHITE
       end
 
@@ -60,15 +65,6 @@ module Oxlinegame
         @guide.draw(0, @window.height * 0.8, ZOrder::TEXT,
                     1, 1, @guide_color)
         @players.each_with_index do |player, i|
-          x = @window.width / @players.size * i
-          if @players_cursor == i
-            color = Gosu::Color::RED
-          else
-            color = Gosu::Color::WHITE
-          end
-          @player_labels[player].draw(x, @window.height * 0.6,
-                                      ZOrder::TEXT,
-                                      1, 1, color)
           x = (@window.width / @players.size) * (i + 0.3)
           @playerx_font.draw("player#{i + 1}",
                              x, @window.height * 0.5,
@@ -79,26 +75,26 @@ module Oxlinegame
       def button_down(id)
         case id
         when Gosu::KbUp
-          @players[@players_cursor] = Player::MAN
+          @players[@players.cursor] = Player::MAN
         when Gosu::KbDown
-          @players[@players_cursor] = Player::COM
+          @players[@players.cursor] = Player::COM
         when Gosu::KbLeft
-          @players_cursor -= 1
-          if @players_cursor < 0
+          @players.cursor -= 1
+          if @players.cursor < 0
             if @players.size >= 2
               @players.pop
               @window.options[:n_players] -= 1
             end
-            @players_cursor = 0
+            @players.cursor = 0
           end
         when Gosu::KbRight
-          @players_cursor += 1
-          if @players_cursor > @players.size - 1
+          @players.cursor += 1
+          if @players.cursor > @players.size - 1
             if @players.size <= 8
               @players << Player::COM
               @window.options[:n_players] += 1
             end
-            @players_cursor = @players.size - 1
+            @players.cursor = @players.size - 1
           end
         when Gosu::KbReturn
           @window.scenes.unshift(Main.new(@window, @players))
