@@ -58,32 +58,34 @@ module Oxlinegame
 
       def lined?
         column_lines = @cells.transpose
-        slant_lines = @cells.collect.with_index do |l, i|
-          line = l.dup
+        slant_lines = @cells.collect.with_index do |_line, i|
+          line = _line.dup
           i.times do
-            line.push(line.shift)
+            line.push(0)
+          end
+          (_line.size - 1 - i).times do
+            line.unshift(0)
           end
           line
         end.transpose
-        r_slant_lines = @cells.collect.with_index do |l, i|
-          line = l.dup
+        r_slant_lines = @cells.collect.with_index do |_line, i|
+          line = _line.dup
           i.times do
-            line.unshift(line.pop)
+            line.unshift(0)
+          end
+          (_line.size - 1 - i).times do
+            line.push(0)
           end
           line
         end.transpose
-        @n_rows.times do |i|
-          if line_check(@cells[i])
-            return true
-          end
-          if line_check(column_lines[i])
-            return true
-          end
-          if line_check(slant_lines[i])
-            return true
-          end
-          if line_check(r_slant_lines[i])
-            return true
+        [
+          @cells,
+          column_lines,
+          slant_lines,
+          r_slant_lines,
+        ].each do |lines|
+          lines.each do |line|
+            return true if line_check(line)
           end
         end
         false
