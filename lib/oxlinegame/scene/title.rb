@@ -30,7 +30,7 @@ module Oxlinegame
             Gosu::Image.from_text(@window,
                                   label,
                                   @font_path,
-                                  20,
+                                  40,
                                   0,
                                   120,
                                   :center)

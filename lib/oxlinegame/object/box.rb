@@ -18,6 +18,7 @@ module Oxlinegame
         @width = width
         @height = height
         @images = images
+        @padding = 0.3
         @items = []
         @cursor = nil
         @color = Gosu::Color::WHITE
@@ -57,18 +58,28 @@ module Oxlinegame
         @items.each_with_index do |item, i|
           case @direction
           when :vertical
+            width = @width
+            height = @height / @items.size
             x1 = @x
-            y1 = @y + @height / @items.size * i
-            x2 = @x + @width
-            y2 = @y + @height / @items.size * (i + 1)
+            y1 = @y + height * i
+            x2 = @x + width
+            y2 = @y + height * (i + 1)
           when :horizontal
-            x1 = @x + @width / @items.size * i
+            width = @width / @items.size
+            height = @height
+            x1 = @x + width * i
             y1 = @y
-            x2 = @x + @width / @items.size * (i + 1)
-            y2 = @y + @height
+            x2 = @x + width * (i + 1)
+            y2 = @y + height
           else
             raise "Supported directions are :vertical or :horizontal"
           end
+          x_padding = width * @padding
+          y_padding = height * @padding
+          x1 += x_padding
+          y1 += y_padding
+          x2 -= x_padding
+          y2 -= y_padding
           if i == @cursor
             color = @cursor_color
           else
