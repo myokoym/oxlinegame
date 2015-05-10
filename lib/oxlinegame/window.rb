@@ -6,7 +6,12 @@ module Oxlinegame
     def initialize(options={})
       super
       @options[:n_rows] ||= 3
-      @options[:n_win_cells] ||= 3
+      if @options[:n_rows] < 5
+        default_n_win_cells = @options[:n_rows]
+      else
+        default_n_win_cells = 5
+      end
+      @options[:n_win_cells] ||= default_n_win_cells
       @options[:n_players] ||= 2
       self.caption = "Oxline"
       @scenes = []
